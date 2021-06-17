@@ -5,8 +5,8 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 
-SPOTIPY_CLIENT_ID = ''
-SPOTIPY_CLIENT_SECRET = ''
+SPOTIPY_CLIENT_ID = '08506e7f1b51411394c3b98565732d1f'
+SPOTIPY_CLIENT_SECRET = 'e8aa11e748db461fa385548eb742f238'
 
 
 # Create your views here.
@@ -50,8 +50,8 @@ def getsongs(request):
     song_names_spans = soup.find_all("span", class_="chart-element__information__song text--truncate color--primary")
     song_names = [song.getText() for song in song_names_spans]
 
-    print(soup.prettify())
-    print(song_names)
+    # print(soup.prettify())
+    # print(song_names)
 
     scope = "user-library-read"
     sp = spotipy.Spotify(
@@ -70,5 +70,10 @@ def getsongs(request):
     year = desired_date.split("-")[0]
     for song in song_names:
         result = sp.search(q=f"track: {song} year: {year}", type="track")
+        try:
+            uri = result["tracks"]["items"][0]["uri"]
+            song_uris.append(uri)
+        except IndexError:
+            print(f"{song} doesn't exist in Spotify.  Skipped.")
 
     # return render(request, "summer_song_app/getsongs.html", {'desired_date': chosen_date})
