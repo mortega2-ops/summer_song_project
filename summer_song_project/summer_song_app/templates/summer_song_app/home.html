@@ -10,6 +10,14 @@
 <body>
 <div class="container text-center">
     <h1> Hello and welcome to the summer songs app!</h1>
+
+<form action="/getsongs/ " >
+<!--    cross site request forgery token -->
+    {% csrf_token %}
+    <label for="end_date">Enter a date in this format YYYY-MM-DD: </label>
+    <input id="end_date" type="text" name="end_date">
+    <button type="submit">Enter for your playlist.</button>
+</form>
 </div>
 </body>
 </html>
