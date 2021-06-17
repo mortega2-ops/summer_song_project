@@ -5,8 +5,8 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 
-SPOTIPY_CLIENT_ID = '08506e7f1b51411394c3b98565732d1f'
-SPOTIPY_CLIENT_SECRET = 'e8aa11e748db461fa385548eb742f238'
+SPOTIPY_CLIENT_ID = ''
+SPOTIPY_CLIENT_SECRET = ''
 
 
 # Create your views here.
@@ -16,23 +16,23 @@ def home(request):
     return render(request, "summer_song_app/home.html")
 
 
-def get_name(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = NameForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = NameForm()
-
-    return render(request, 'name.html', {'form': form})
+# def get_name(request):
+#     # if this is a POST request we need to process the form data
+#     if request.method == 'POST':
+#         # create a form instance and populate it with data from the request:
+#         form = NameForm(request.POST)
+#         # check whether it's valid:
+#         if form.is_valid():
+#             # process the data in form.cleaned_data as required
+#             # ...
+#             # redirect to a new URL:
+#             return HttpResponseRedirect('/thanks/')
+#
+#     # if a GET (or any other method) we'll create a blank form
+#     else:
+#         form = NameForm()
+#
+#     return render(request, 'name.html', {'form': form})
 
 
 def getsongs(request):
@@ -71,4 +71,4 @@ def getsongs(request):
     for song in song_names:
         result = sp.search(q=f"track: {song} year: {year}", type="track")
 
-    return render(request, "summer_song_app/getsongs.html", {'desired_date': chosen_date})
+    # return render(request, "summer_song_app/getsongs.html", {'desired_date': chosen_date})
