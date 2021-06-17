@@ -47,11 +47,11 @@ def getsongs(request):
     response = requests.get("https://www.billboard.com/charts/hot-100/" + desired_date)
 
     soup = BeautifulSoup(response.text, 'html.parser')
-    song_names_spans = soup.find_all("span", class_="chart-element__information__song text--truncate color--primary")
+    song_names_spans = soup.find_all("span", class_="chart-element__information__song")
     song_names = [song.getText() for song in song_names_spans]
 
     # print(soup.prettify())
-    # print(song_names)
+    print(song_names)
 
     scope = "user-library-read"
     sp = spotipy.Spotify(
@@ -61,7 +61,8 @@ def getsongs(request):
             redirect_uri="https://example.com",
             scope="playlist-modify-private",
             show_dialog=True,
-            cache_path="token.txt"
+            cache_path="../../token.txt"
+            # cache_path="token.txt"
         ))
 
     user_id = sp.current_user()["id"]
@@ -69,11 +70,17 @@ def getsongs(request):
     song_uris = []
     year = desired_date.split("-")[0]
     for song in song_names:
-        result = sp.search(q=f"track: {song} year: {year}", type="track")
+        result = sp.search(q=song, type="track")
+        # result = sp.search(q=f"track: {song} year: {year}", type="track")
         try:
             uri = result["tracks"]["items"][0]["uri"]
             song_uris.append(uri)
         except IndexError:
             print(f"{song} doesn't exist in Spotify.  Skipped.")
 
-    # return render(request, "summer_song_app/getsongs.html", {'desired_date': chosen_date})
+    playlist = sp.user_playlist_create(user=user_id, name=f"{desired_date} Billboard 100", public=False)
+    print(playlist)
+
+    sp.playlist_add_items(playlist_id=playlist["id"], items=song_uris)
+
+    return render(request, "summer_song_app/getsongs.html", {'desired_date': chosen_date})
