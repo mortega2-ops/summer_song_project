@@ -7,9 +7,18 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<body class="p-3 mb-2 bg-info text-dark">
 <div class="container text-center">
-    <h1> Hello and welcome to the summer songs app!</h1>
+    <h1>Hello and welcome to the summer songs app!</h1><br/><br/>
+    <h2>Today is {{ today }} </h2> <br/>
+    <h2>Today's Holidays Are: </h2> <br/>
+    <table class="table center">
+        {% for day in todays_holidays %}
+        <tr>
+            <td><h3>{{ day }}</h3></td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
 </body>
 </html>
