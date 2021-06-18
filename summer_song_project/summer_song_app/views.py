@@ -1,9 +1,10 @@
+from pprint import pprint
+
 from django.shortcuts import render
 from bs4 import BeautifulSoup
 import requests
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-
 
 SPOTIPY_CLIENT_ID = '08506e7f1b51411394c3b98565732d1f'
 SPOTIPY_CLIENT_SECRET = 'e8aa11e748db461fa385548eb742f238'
@@ -42,13 +43,15 @@ def getsongs(request):
     # def get(self, request):
     #     form = GetYearForm()
     #     return render(request, )
+    try:
+        desired_date = request.GET.get('end_date', '2021-06-15')
+        response = requests.get("https://www.billboard.com/charts/hot-100/" + desired_date)
 
-    desired_date = request.GET.get('end_date', '2021-06-15')
-    response = requests.get("https://www.billboard.com/charts/hot-100/" + desired_date)
-
-    soup = BeautifulSoup(response.text, 'html.parser')
-    song_names_spans = soup.find_all("span", class_="chart-element__information__song")
-    song_names = [song.getText() for song in song_names_spans]
+        soup = BeautifulSoup(response.text, 'html.parser')
+        song_names_spans = soup.find_all("span", class_="chart-element__information__song")
+        song_names = [song.getText() for song in song_names_spans]
+    except Exception:
+        print("Error attempting to get song list from billboard.com")
 
     # print(soup.prettify())
     print(song_names)
@@ -80,7 +83,14 @@ def getsongs(request):
 
     playlist = sp.user_playlist_create(user=user_id, name=f"{desired_date} Billboard 100", public=False)
     print(playlist)
+    pprint(playlist)
+
+    playlist_urls = playlist["external_urls"]
+    my_playlist_url = playlist_urls["spotify"]
+    print(my_playlist_url)
 
     sp.playlist_add_items(playlist_id=playlist["id"], items=song_uris)
 
-    return render(request, "summer_song_app/getsongs.html", {'desired_date': chosen_date})
+    # return render(request, "summer_song_app/getsongs.html")
+
+    return render(request, "summer_song_app/getsongs.html", {"playlist": my_playlist_url})
