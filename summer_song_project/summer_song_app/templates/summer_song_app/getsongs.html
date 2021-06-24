@@ -1,15 +1,17 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="{% static "images/Sunshine-icon.png" %}">
     <title>Summer Songs Playlists</title>
 </head>
-<body>
+<body id="bg" style="background-image: url('{% static "images/sean-oulashin-unsplash-crop2.jpg"%}');">
 <div class="container text-center">
-    <h1> Playlists for {{today}}</h1><br/><br/>
+    <h1 class="text-muted"> Playlists for {{today}}</h1><br/><br/>
     <h2>
             <a href="{{holiday_playlist}}" target="_blank">Today's Holiday Songs </a><br/><br/>
     </h2>
@@ -17,6 +19,11 @@
         <a href="{{playlist}}" target="_blank"><em>Billboard Hot 100</em> Songs from {{desired_date}} </a>
     </h2>
 </div>
+<p class="col align-self-end">Photo by
+    <a href="https://unsplash.com/@oulashin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+        Sean Oulashin</a> on
+    <a href="https://unsplash.com/s/photos/summer-landscape-background?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  </p>
 </body>
 </html>
 

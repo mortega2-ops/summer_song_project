@@ -7,18 +7,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <meta charset="UTF-8">
-
+    <link rel="icon" type="image/png" href="{% static "images/Sunshine-icon.png" %}">
     <title>Summer Songs</title>
 </head>
-<body id="bg" style="background-image: url('{% static "summer_song_app/static/images/sean-oulashin-unsplash.jpg"%}');">
+<body id="bg" style="background-image: url('{% static "images/sean-oulashin-unsplash-crop2.jpg"%}');">
 <div class="container text-center">
-    <h1 class="text-info"> Hello and welcome to the summer songs app!</h1><br/>
-    <h2 class="text-info">Holidays celebrated today, {{ today }} are: </h2> <br/>
+<!--    <img src="{% static 'images/sean-oulashin-unsplash.jpg' %}">-->
+    <h1 class="text-muted"> Hello and welcome to the summer songs app!</h1><br/>
+    <h2 class="text-muted">Holidays celebrated today, {{ today }} are: </h2> <br/>
 <!--    <h2>Today's Holidays are: </h2> <br/>-->
     <table class="table center table-striped table-sm bg-info bg-light">
         {% for day in todays_holidays %}
-        <tr>
-            <td><h5>{{ day }}</h5></td>
+        <tr style="width: 65%">
+            <td style="width: 65%"><h5>{{ day }}</h5></td>
         </tr>
         {% endfor %}
     </table>
@@ -29,7 +30,7 @@
     {% csrf_token %}
 <!--        <label for="end_date">Enter a date in this format YYYY-MM-DD: </label>-->
 <!--        <input id="end_date" type="text" name="end_date"><br/>-->
-        <label for="desired_year" class="text-info">Want to remember a particular summer?  Enter a 4 digit year: </label>
+        <label for="desired_year"><strong>Want to remember a particular summer?  Enter a 4 digit year:</strong></label>
         <input id="desired_year" type="text" name="desired_year"></input><br/><br/>
         <button type="submit" class="btn btn-primary">Enter for your playlists.</button>
     </form>
