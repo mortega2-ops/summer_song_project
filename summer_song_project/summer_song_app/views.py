@@ -9,8 +9,8 @@ from datetime import date
 import re
 import json
 
-SPOTIPY_CLIENT_ID = 'need this'
-SPOTIPY_CLIENT_SECRET = 'need this'
+SPOTIPY_CLIENT_ID = '08506e7f1b51411394c3b98565732d1f'
+SPOTIPY_CLIENT_SECRET = 'e8aa11e748db461fa385548eb742f238'
 
 
 def home(request):
