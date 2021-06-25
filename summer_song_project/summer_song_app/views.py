@@ -30,7 +30,7 @@ def home(request):
             'todays_holidays': holiday_list,
             'today': date.today()
         }
-
+        print(str(today_dict['today']))
         request.session['today'] = str(today_dict['today'])
         holiday_key_words = []
         remove_words_list = ['Global', 'International', 'National', 'Day', 'Republic', 'Audacity to', 'of', 'Stand for',

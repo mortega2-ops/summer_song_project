@@ -1,0 +1,11 @@
+{
+    "tracks": {
+        "href": "https://api.spotify.com/v1/search?query=Please+Take+My+Children+to+Work&type=track&offset=0&limit=4",
+        "items": [],
+        "limit": 4,
+        "next": null,
+        "offset": 0,
+        "previous": null,
+        "total": 0
+    }
+}
