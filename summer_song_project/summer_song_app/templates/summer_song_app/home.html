@@ -9,7 +9,7 @@
 </head>
 <body class="p-3 mb-2 bg-info text-dark">
 <div class="container text-center">
-    <h1>Hello and welcome to the summer songs app!</h1><br/><br/>
+    <h1 class="p-3 mb-2 bg-warning text-dark">Welcome to the summer songs app!</h1><br/>
     <h2>Today is {{ today }} </h2> <br/>
     <h2>Today's Holidays Are: </h2> <br/>
     <table class="table center table-dark">
@@ -17,14 +17,15 @@
         <tr>
             <td>
                 <h3>
-                    <a href="{% url 'playlist' %}" class="link-light">
-                        {{ day }}
-                    </a>
+                    {{ day }}
                 </h3>
             </td>
         </tr>
         {% endfor %}
     </table>
+    <a href="{% url 'playlist' %}">
+        <button type="button" class="btn btn-warning"><strong><h3>Generate Today's Playlist</h3></strong></button>
+    </a>
 </div>
 </body>
 </html>

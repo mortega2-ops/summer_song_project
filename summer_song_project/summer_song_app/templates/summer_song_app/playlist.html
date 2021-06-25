@@ -8,12 +8,15 @@
 </head>
 <body class="p-3 mb-2 bg-dark text-white">
 <div class="container text-center">
-    <h1><a href="{{ spotify_url }}" target="_blank">{{ song_name }}</a></h1>
-    <h1>
+    <h1> Today's Playlist: </h1>
+    <h1 class="p-3 mb-2 bg-warning text-dark">
         {% for song in playlist %}
         <a href="{{ song.1 }}" target="blank"> {{ song.0 }}<br></a>
         {% endfor %}
     </h1>
+    <a href="{% url 'home' %}">
+        <button type="button" class="btn btn-warning"><h3>Home</h3></button>
+    </a>
 </div>
 </body>
 </html>
