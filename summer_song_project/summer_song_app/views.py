@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import requests
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+import datetime
 from datetime import date
 import re
 import json
@@ -93,6 +94,13 @@ def getsongs(request):
         except IndexError:
             print(f"{song} doesn't exist in Spotify.  Skipped.")
 
+    desired_date_object = datetime.datetime.strptime(desired_date, '%Y-%m-%d')
+    desired_date_string_format = desired_date_object.strftime('%B %d, %Y')
+
+    today_object = datetime.datetime.strptime(this_day, '%Y-%m-%d')
+    today_string_format = today_object.strftime('%B %d, %Y')
+    print(desired_date_string_format)
+
     playlist = sp.user_playlist_create(user=user_id, name=f"{desired_date} Billboard 100", public=False)
 
     playlist_urls = playlist["external_urls"]
@@ -127,11 +135,12 @@ def getsongs(request):
         except IndexError:
             print(f"{topic} doesn't exist in Spotify.  Skipped.")
 
-    topic_playlist = spot.user_playlist_create(user=user_id, name=f"Today's Holiday Playlist", public=False)
+    topic_playlist = spot.user_playlist_create(user=user_id, name=f"{today_string_format} Holiday Playlist", public=False)
     topic_playlist_urls = topic_playlist["external_urls"]
     my_topic_playlist_url = topic_playlist_urls["spotify"]
     spot.playlist_add_items(playlist_id=topic_playlist["id"], items=topic_uris)
 
-    return render(request, "summer_song_app/getsongs.html", {"playlist": my_playlist_url, "desired_date": desired_date,
+    return render(request, "summer_song_app/getsongs.html", {"playlist": my_playlist_url,
+                                                             "desired_date": desired_date_string_format,
                                                              "holiday_playlist": my_topic_playlist_url,
-                                                             "today": this_day})
+                                                             "today": today_string_format})

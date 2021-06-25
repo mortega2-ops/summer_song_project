@@ -1,0 +1,14 @@
+html {
+    position: relative;
+    min-height: 100%
+}
+
+.footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height 100 px;
+    background: rgba(25, 25, 25, 0.01)
+
+}
