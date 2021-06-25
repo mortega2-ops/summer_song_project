@@ -7,8 +7,6 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import json
 
-# Create your views here.
-
 
 def home(request):
     holiday_list = []
@@ -42,7 +40,7 @@ def playlist_gen(request):
         client_credentials_manager=SpotifyClientCredentials(client_id='a25f7890ec934e0c9f9fb86b7bc00cd7',
                                                             client_secret='d9b515dbfa074cd9a358db90609c0567'))
 
-    results = spotify.search(q='Back in Black', limit=1, type='track', market=None)
+    results = spotify.search(q='Eat+Your+Vegetables', limit=1, type='track', market=None)
     # print(json.dumps(results, sort_keys=True, indent=4))
     # print(type(results))
     # print(json.dumps(results['tracks']['items'][0]['id'], sort_keys=True, indent=2))

@@ -20,5 +20,5 @@ from summer_song_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('playlist/', views.playlist_gen)
+    path('playlist/', views.playlist_gen, name='playlist')
 ]

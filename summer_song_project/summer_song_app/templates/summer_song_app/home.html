@@ -12,10 +12,16 @@
     <h1>Hello and welcome to the summer songs app!</h1><br/><br/>
     <h2>Today is {{ today }} </h2> <br/>
     <h2>Today's Holidays Are: </h2> <br/>
-    <table class="table center">
+    <table class="table center table-dark">
         {% for day in todays_holidays %}
         <tr>
-            <td><h3>{{ day }}</h3></td>
+            <td>
+                <h3>
+                    <a href="{% url 'playlist' %}" class="link-light">
+                        {{ day }}
+                    </a>
+                </h3>
+            </td>
         </tr>
         {% endfor %}
     </table>
